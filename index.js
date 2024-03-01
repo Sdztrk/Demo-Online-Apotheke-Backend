@@ -31,7 +31,13 @@ app.use(cors({
  }))
 
  // set static folder 
-app.use(express.static(path.join(__dirname, 'build')))
+ app.use(express.static(path.join(__dirname, 'build')));
+ 
+ app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
+
 // Express Error Handler 
 app.use(require('./middlewares/errorHandler'));
 
@@ -56,25 +62,25 @@ app.use("/docs/json", (req,res)=> {
 
 
 
-app.get('/', (req, res) => {
-    /*
-        #swagger.tags= ['Root']
-        #swagger.summary= 'Root Path'
-        #swagger.description= 'This is the root path of our API.  It will provide links to 
-        the documentation (visible with swagger-ui-express and redoc-express) and contact information.'
-    */
+// app.get('/', (req, res) => {
+//     /*
+//         #swagger.tags= ['Root']
+//         #swagger.summary= 'Root Path'
+//         #swagger.description= 'This is the root path of our API.  It will provide links to 
+//         the documentation (visible with swagger-ui-express and redoc-express) and contact information.'
+//     */
 
-    res.send({
-        error: false,
-        message: 'Welcome to Online Apotheke API',
-        api: {
-            documents: {
-                swagger: `https://online-apotheke-v1-api.onrender.com/docs/swagger`,
-            },
-            contact: 'msaidozturk1@gmail.com'
-        },
-    })
-})
+//     res.send({
+//         error: false,
+//         message: 'Welcome to Online Apotheke API',
+//         api: {
+//             documents: {
+//                 swagger: `https://online-apotheke-v1-api.onrender.com/docs/swagger`,
+//             },
+//             contact: 'msaidozturk1@gmail.com'
+//         },
+//     })
+// })
 
 
 
