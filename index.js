@@ -31,11 +31,9 @@ app.use(cors({
  }))
 
  // set static folder 
- app.use(express.static(path.join(__dirname, "frontend", 'build')));
+ app.use(express.static(path.join(__dirname, 'build')));
  
- app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
+
 
 
 // Express Error Handler 
@@ -48,17 +46,6 @@ app.use('/api/v1', require('./routes'))
 app.use("/docs/swagger", swaggerUI.serve, swaggerUI.setup(swaggerJson))
 
 
-//route for redoc:
-app.use("/docs/redoc", redoc({
-    spaceUrl:"docs/json",
-    title:"API Docs"
-}))
-
-
-//route for swagger.json
-app.use("/docs/json", (req,res)=> {
-    res.sendFile("swagger.json", {root:"."})
-})
 
 
 
@@ -85,7 +72,7 @@ app.use("/docs/json", (req,res)=> {
 
 
 // Run server 
-const server = app.listen(PORT, console.log(`Server running in ${MODE} mode on http://${HOST}:${PORT}`.blue.underline))
+const server = app.listen(PORT, console.log(`Server running in ${MODE} mode on http://${HOST}:${PORT} see swagger http://${HOST}:${PORT}/docs/swagger`.blue.underline))
 
 
 // Handle rejections
